@@ -1,0 +1,24 @@
+.event__list-item {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #4d1bd8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event__list-item h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #4d1bd8;
+}
+
+.event__list-item h2 {
+  margin: 0;
+  font-size: 1rem;
+  color: #666;
+}
+
+.event__list-item p {
+  margin: 0;
+}

@@ -3,38 +3,3 @@
   max-width: 80%;
   margin: 5rem auto;
 }
-
-.form-control label,
-.form-control input {
-  width: 100%;
-  display: block;
-}
-
-.form-control input {
-  color: #4d1bd8;
-}
-
-.form-control input {
-  border: none;
-  border-bottom: 1px solid #4d1bd8;
-  border-radius: .2rem;
-  padding: .6rem .4rem;
-  font-size: 1rem;
-}
-
-.form-control input:focus {
-  outline: none;
-  box-shadow: 0px 1px 1px #4d15e7;
-}
-
-::placeholder {
-  color: #4d1bd8;
-}
-
-.form-control label {
-  margin-bottom: .5rem;
-}
-
-.form-control {
-  margin-bottom: 1rem;
-}
