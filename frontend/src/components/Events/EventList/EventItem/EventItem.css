@@ -1,8 +1,10 @@
 .event__list-item {
   margin: 1rem 0;
   padding: 1rem;
-  border: 1px solid #4d1bd8;
   display: flex;
+  border: 1px solid #4d1bd8;
+  box-shadow: 0 2px .5rem #c3adfe;
+  border-radius: .45rem;
   justify-content: space-between;
   align-items: center;
 }

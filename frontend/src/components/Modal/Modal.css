@@ -1,11 +1,13 @@
 .modal {
   width: 90%;
   background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   position: fixed;
   top: 20vh;
   left: 5%;
   z-index: 100;
+  overflow: hidden;
+  border-radius: .8rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
 
 .modal__header {

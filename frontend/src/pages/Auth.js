@@ -1,8 +1,6 @@
 import React from "react";
-// import axios from "axios";
-import AuthContext from '../context/auth-context';
+import AuthContext from "../context/auth-context";
 import "./Auth.css";
-
 
 class AuthPage extends React.Component {
   constructor(props) {
@@ -64,16 +62,16 @@ class AuthPage extends React.Component {
       });
       if (res.status !== 200 && res.status !== 201) throw new Error("Failed!");
       let resData = await res.json();
-      if(resData.data.login.token) {
-        this.context.login(resData.data.login.token, resData.data.login.userId,
-          resData.data.login.tokenExpiration)
-      } 
-      console.log(resData);
+      if (resData.data.login.token) {
+        this.context.login(
+          resData.data.login.token,
+          resData.data.login.userId,
+          resData.data.login.tokenExpiration
+        );
+      }
     } catch (error) {
       console.log(error);
     }
-    // this.emailEl.current.value = "";
-    // this.passwordEl.current.value = "";
   };
 
   render() {

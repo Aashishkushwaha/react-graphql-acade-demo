@@ -24,6 +24,8 @@ class Events extends React.Component {
     this.descriptionElRef = React.createRef();
   }
 
+  isActive = true;
+
   async componentDidMount() {
     this.fetchEvents();
   }
@@ -61,13 +63,14 @@ class Events extends React.Component {
 
       let resData = await res.json();
 
-      this.setState({
-        events: resData.data.events,
-        isLoading: false,
-      });
+      if (this.isActive)
+        this.setState({
+          events: resData.data.events,
+          isLoading: false,
+        });
     } catch (error) {
       console.log(error);
-      this.setState({ isLoading: false });
+      if (this.isActive) this.setState({ isLoading: false });
     }
   };
 
@@ -162,7 +165,49 @@ class Events extends React.Component {
     this.setState({ creating: false, selectedEvent: null });
   };
 
-  bookEventHandler = () => {};
+  bookEventHandler = async () => {
+    if (!this.context.token) {
+      this.setState({ selectedEvent: null });
+      return;
+    }
+    try {
+      const requestBody = {
+        query: `
+          mutation {
+            bookEvent(eventId: "${this.state.selectedEvent._id}") {
+              _id
+              createdAt
+              updatedAt
+            }
+          }
+        `,
+      };
+
+      const token = this.context.token;
+
+      let res = await fetch("http://localhost:4000/graphql", {
+        method: "POST",
+        body: JSON.stringify(requestBody),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.status !== 200 && res.status !== 201) throw new Error("Failed!");
+
+      await res.json();
+
+      this.setState({ selectedEvent: null });
+    } catch (error) {
+      console.log(error);
+      this.setState({ selectedEvent: null });
+    }
+  };
+
+  componentWillUnmount() {
+    this.isActive = false;
+  }
 
   render() {
     return (
@@ -211,7 +256,7 @@ class Events extends React.Component {
             canCancel
             onCancel={this.modalCancleHandler}
             onConfirm={this.bookEventHandler}
-            confirmText="Book"
+            confirmText={this.context.token ? "Book" : "Confirm"}
           >
             <h1>{this.state.selectedEvent.title}</h1>
             <h2>
